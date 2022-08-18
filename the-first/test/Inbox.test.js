@@ -12,15 +12,22 @@ class Car  {
         return 'vroom';
     }
 }
-
+let car;
+beforeEach( ()=>{
+    console.log('a')
+    car = new Car();
+    const printCar = () => {
+        console.log("ggg")
+    }
+});
 describe('Car Class', () =>{
     it('can park', ()=>{
-        const car = new Car();
+        // const car = new Car();
         assert.equal(car.park(), 'stopped');
     })
 
     it('can drive', ()=>{
-        const car = new Car();
+        // const car = new Car();
         assert.equal(car.drive(), 'vroom');
     })
 })
