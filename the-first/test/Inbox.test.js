@@ -16,9 +16,6 @@ let car;
 beforeEach( ()=>{
     console.log('a')
     car = new Car();
-    const printCar = () => {
-        console.log("ggg")
-    }
 });
 describe('Car Class', () =>{
     it('can park', ()=>{
