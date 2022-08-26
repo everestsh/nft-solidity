@@ -1,4 +1,5 @@
 const assert = require('assert');
+const { AsyncResource } = require('async_hooks');
 const ganache = require('ganache-cli');
 const Web3 = require('web3');
 const web3 = new Web3(ganache.provider());
@@ -81,5 +82,16 @@ describe('Lottery multiple accounts to enter', ()=>{
         }catch(err){
             assert(err);
         }
+    })
+    it('sends money to the winner and resets the players array', async ()=>{
+        await lottery.methods.enter().send({
+            from: accounts[0],
+            value: web3.utils.toWei('2', 'ether')
+        });
+        const initiialBalance = await web3.eth.getBalance(accounts[0]);
+        await lottery.methods.pickWinner().send({ from: accounts[0]});
+        const finalBalance = await web3.eth.getBalance(accounts[0]);
+        const difference = finalBalance - initiialBalance;
+        assert(difference > web3.utils.toWei('1.8','ether'));
     })
 })
