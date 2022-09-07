@@ -11,6 +11,7 @@ const output = solc.compile(source, 1).contracts;
 
 fs.ensureDirSync(buildPath);
 
+console.log(output);
 for (let contract in output) {
   fs.outputJsonSync(
     path.resolve(buildPath, contract + ".json"),
@@ -18,3 +19,4 @@ for (let contract in output) {
   );
 }
 
+// npm install solc@0.4.26
